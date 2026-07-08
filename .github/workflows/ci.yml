@@ -29,3 +29,20 @@ jobs:
 
       - name: Build client Docker image
         run: docker build -t filmflix-client:test ./client
+
+
+      - name: Scan backend image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: filmflix-api:test
+          format: table
+          exit-code: 0
+          severity: CRITICAL,HIGH
+
+      - name: Scan client image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: filmflix-client:test
+          format: table
+          exit-code: 0
+          severity: CRITICAL,HIGH
