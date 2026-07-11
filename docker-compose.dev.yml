@@ -6,7 +6,7 @@ services:
       - "27017:27017"
     volumes:
       - ./data/db:/data/db
-    
+
   backend:
     build: .
     container_name: backend_filmflix
@@ -15,9 +15,9 @@ services:
     depends_on:
       - mongodb
     environment:
-      - PORT=5000
-      - MONGO_URL=mongodb://mongodb:27017/filmflix
-      - JWT_SECRET=filmflixsecret
+      PORT: 5000
+      MONGO_URL: mongodb://mongodb:27017/filmflix
+      JWT_SECRET: filmflixsecret
 
   client:
     build: ./client
@@ -37,36 +37,3 @@ services:
     depends_on:
       - client
       - backend
-
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus_filmflix
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana_filmflix
-    ports:
-      - "3001:3000"
-    depends_on:
-      - prometheus
-
-  cadvisor:
-    image: gcr.io/cadvisor/cadvisor:latest
-    container_name: cadvisor_filmflix
-    ports:
-      - "8080:8080"
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-
-  node-exporter:
-    image: prom/node-exporter:latest
-    container_name: node_exporter_filmflix
-    ports:
-      - "9100:9100"
