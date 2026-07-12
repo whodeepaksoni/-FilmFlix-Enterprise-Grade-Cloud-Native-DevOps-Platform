@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                checkout scm([
+                checkout ([
                     $class: 'GitSCM',
                     branches: [[name: '*/main']],
                     userRemoteConfigs: [[url: 'https://github.com/whodeepaksoni/-FilmFlix-Enterprise-Grade-Cloud-Native-DevOps-Platform.git']]
