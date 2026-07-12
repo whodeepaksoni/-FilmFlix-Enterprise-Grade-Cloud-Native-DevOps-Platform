@@ -1,5 +1,7 @@
 node_modules
+client
+admin
 .git
 .env
-data
-npm-debug.logd
+npm-debug.log
+Dockerfile
