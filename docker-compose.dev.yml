@@ -17,7 +17,7 @@ services:
     environment:
       PORT: 5000
       MONGO_URL: mongodb://mongodb:27017/filmflix
-      JWT_SECRET: filmflixsecret
+      SECRET_KEY: filmflixsecret
 
   client:
     build: ./client
