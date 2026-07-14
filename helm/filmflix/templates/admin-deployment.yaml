@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin
+  namespace: filmflix
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: admin
+
+  template:
+    metadata:
+      labels:
+        app: admin
+
+    spec:
+      containers:
+      - name: admin
+        image: whodeepaksoni/project-filmflix-admin:latest
+
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 80
