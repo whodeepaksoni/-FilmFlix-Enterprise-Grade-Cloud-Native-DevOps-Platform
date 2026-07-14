@@ -1,3 +1,3 @@
-aws_region   = "ap-south-1"
-instance_type = "t2.medium"
-key_name      = "filmflix.pem"
+aws_region   = "us-east-1"
+instance_type = "t3.small"
+key_name      = "filmflix"
