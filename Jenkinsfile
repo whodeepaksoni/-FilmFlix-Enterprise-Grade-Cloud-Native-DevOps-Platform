@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Wait 5 Minutes') {
+            steps {
+                sleep(time: 5, unit: 'MINUTES')
+            }
+        }
         stage('checkout') {
             steps {
                 checkout ([
