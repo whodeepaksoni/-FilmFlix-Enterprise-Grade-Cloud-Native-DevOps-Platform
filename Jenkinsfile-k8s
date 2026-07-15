@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Wait 5 Minutes') {
+            steps {
+                sleep(time: 5, unit: 'MINUTES')
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/whodeepaksoni/-FilmFlix-Enterprise-Grade-Cloud-Native-DevOps-Platform.git']]
+                ])
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                kubectl delete -f k8s/ --ignore-not-found=true
+                kubectl apply -f k8s/
+                kubectl rollout status deployment/backend -n filmflix
+                kubectl rollout status deployment/admin -n filmflix
+                '''
+            }
+        }
+    }
+}
