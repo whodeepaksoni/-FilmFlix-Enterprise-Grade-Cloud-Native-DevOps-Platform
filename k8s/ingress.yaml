@@ -18,7 +18,7 @@ spec:
               service:
                 name: admin-service
                 port:
-                  number: 80
+                  number: 3000
 
           - path: /api
             pathType: Prefix

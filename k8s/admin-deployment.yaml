@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: admin
-        image: whodeepaksoni/project-filmflix-admin:latest
+        image: whodeepaksoni/filmflix-admin:latest
 
         imagePullPolicy: Always
 
