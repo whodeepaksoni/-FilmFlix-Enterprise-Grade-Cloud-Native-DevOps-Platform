@@ -3,6 +3,8 @@ services:
     image: mongo:6
     container_name: mongodb_filmflix
     restart: unless-stopped
+    ports:
+      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
 
@@ -10,8 +12,8 @@ services:
     image: whodeepaksoni/filmflix-backend:latest
     container_name: backend_filmflix
     restart: unless-stopped
-    expose:
-      - "5000"
+    ports:
+      - "5000:5000"
     depends_on:
       - mongodb
     environment:
@@ -23,8 +25,8 @@ services:
     image: whodeepaksoni/filmflix-admin:latest
     container_name: admin_filmflix
     restart: unless-stopped
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
     depends_on:
       - backend
 
