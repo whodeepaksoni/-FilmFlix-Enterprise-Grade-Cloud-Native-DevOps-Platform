@@ -21,12 +21,12 @@ services:
       MONGO_URL: mongodb://mongodb:27017/filmflix
       SECRET_KEY: ${JWT_SECRET}
 
-  admin:
+  admin: 
     image: whodeepaksoni/filmflix-admin:latest
     container_name: admin_filmflix
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - backend
 
