@@ -1,98 +1,93 @@
-# 🎬 FilmFlix: Enterprise-Grade Cloud Native DevOps Platform
+# 🎬 FilmFlix - Enterprise Grade Cloud Native DevOps Platform
 
-> A production-grade Netflix-like streaming platform demonstrating modern DevOps practices using Docker, Jenkins, GitHub Actions, AWS, Nginx, Docker Hub, Trivy, and upcoming Kubernetes, Terraform, and Observability.
-
----
-
-# 📖 Project Overview
-
-FilmFlix is a Netflix-inspired streaming platform built to showcase an end-to-end DevOps workflow.
-
-The objective of this project is to simulate how modern software is built, secured, containerized, deployed, and managed in a production-like environment using industry-standard DevOps tools.
+> Production-ready Netflix-inspired application demonstrating an end-to-end DevOps lifecycle using GitHub Actions, Jenkins, Docker, Kubernetes, Helm, Terraform and AWS.
 
 ---
 
-# 🏗 High Level Architecture
+# 🚀 Project Overview
 
-```text
-                    Developer
-                        │
-                   Git Push
-                        │
-                        ▼
-                GitHub Repository
-                        │
-                        ▼
-              GitHub Actions (CI)
-        ┌─────────────────────────────────┐
-        │                                 │
-        │  Code Validation                │
-        │  Docker Build Verification      │
-        │  Security Checks                │
-        └─────────────────────────────────┘
-                        │
-                        ▼
-                  GitHub Webhook
-                        │
-                        ▼
-                  Jenkins Pipeline
-                        │
-        ┌─────────────────────────────────┐
-        │ Checkout Source Code            │
-        │ Docker Image Build              │
-        │ Trivy Security Scan             │
-        │ Push Images to Docker Hub       │
-        │ Deploy to AWS EC2               │
-        └─────────────────────────────────┘
-                        │
-                        ▼
-                   Docker Hub
-                        │
-                        ▼
-                    AWS EC2
-                        │
-                  Docker Compose
-                        │
-                        ▼
-                Nginx Reverse Proxy
-                 ┌──────────────┐
-                 │              │
-                 ▼              ▼
-          React Client     Backend API
-                                │
-                                ▼
-                            MongoDB
+FilmFlix is a Netflix-inspired streaming platform built to showcase a complete DevOps workflow.
+
+The project demonstrates:
+
+- CI using GitHub Actions
+- CD using Jenkins
+- Containerization using Docker
+- Production deployment using Docker Compose
+- Infrastructure provisioning using Terraform
+- Kubernetes deployment
+- Helm package management
+- AWS EC2 deployment
+
+---
+
+# 🏗 Architecture
+
+```
+                Developer
+                    │
+               Git Push
+                    │
+                    ▼
+            GitHub Repository
+                    │
+        ┌───────────┴───────────┐
+        │                       │
+        ▼                       ▼
+ GitHub Actions (CI)       Jenkins (CD)
+ Build + Trivy Scan      Build & Deployment
+        │                       │
+        └───────────┬───────────┘
+                    ▼
+              Docker Images
+                    │
+                    ▼
+               Docker Hub
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+          ▼                   ▼
+ Docker Compose         Kubernetes
+     (EC2)               + Helm
+          │
+          ▼
+     FilmFlix Platform
 ```
 
 ---
 
-# 🚀 Tech Stack
+# ⚙ Tech Stack
 
 ## Cloud
 
 - AWS EC2
 
+## Infrastructure as Code
+
+- Terraform
+
 ## CI/CD
 
-- Jenkins
 - GitHub Actions
+- Jenkins
 
 ## Containers
 
 - Docker
 - Docker Compose
 
-## Container Registry
+## Container Orchestration
 
-- Docker Hub
+- Kubernetes
+- Helm
 
 ## Reverse Proxy
 
 - Nginx
 
-## Security
+## Database
 
-- Trivy
+- MongoDB
 
 ## Backend
 
@@ -101,136 +96,185 @@ The objective of this project is to simulate how modern software is built, secur
 
 ## Frontend
 
-- React.js
+- React (Admin Panel)
 
-## Database
+## Security
 
-- MongoDB
-
-## Version Control
-
-- Git
-- GitHub
-
-## Monitoring (Planned)
-
-- Prometheus
-- Grafana
-- Node Exporter
-- cAdvisor
-
-## Infrastructure as Code (Planned)
-
-- Terraform
-
-## Container Orchestration (Planned)
-
-- Kubernetes (EKS)
-- Helm
-- ArgoCD
+- Trivy
 
 ---
 
 # 📂 Project Structure
 
-```text
+```
 Project-Flimflix/
-│
+
 ├── admin/
 ├── client/
 ├── models/
 ├── routes/
-├── monitoring/
+
+├── k8s/
+│   ├── backend-deployment.yaml
+│   ├── admin-deployment.yaml
+│   ├── mongodb-deployment.yaml
+│   ├── services
+│   ├── ingress.yaml
+│   └── pvc.yaml
+
+├── helm/
+│   └── filmflix/
+
+├── terraform/
+
 ├── nginx/
 │   ├── dev/
 │   └── prod/
-├── terraform/
-├── helm/
-├── k8s/
-├── scripts/
-├── security/
-├── docs/
-│
-├── Dockerfile
+
+├── monitoring/
+
 ├── docker-compose.dev.yml
 ├── docker-compose.prod.yml
-├── docker-compose.monitoring.yml
-├── package.json
-├── index.js
+
+├── Jenkinsfile
+
 └── README.md
 ```
 
 ---
 
-# 🔄 CI/CD Pipeline
+# 🔄 CI Pipeline
 
-```text
-Developer Push
-      │
-      ▼
-GitHub Repository
-      │
-      ▼
-GitHub Actions
-      │
-      ├── Code Validation
-      ├── Dependency Installation
-      └── Docker Build Verification
-      │
-      ▼
-GitHub Webhook
-      │
-      ▼
-Jenkins
-      │
-      ├── Checkout Source
-      ├── Build Docker Images
-      ├── Trivy Scan
-      ├── Push Images to Docker Hub
-      └── Deploy to AWS EC2
+GitHub Actions performs:
+
+- Checkout Repository
+- Docker Build
+- Trivy Security Scan
+- Pull Request Validation
+
+---
+
+# 🚀 CD Pipeline
+
+Jenkins performs:
+
+- Checkout Source
+- Build Docker Images
+- Trivy Scan
+- Docker Hub Push
+- Deploy to AWS EC2
+- Docker Compose Deployment
+
+---
+
+# 🐳 Docker Compose Deployment
+
+Services
+
+- Backend
+- Admin
+- MongoDB
+- Nginx
+
+Deployment
+
+```
+docker compose -f docker-compose.prod.yml up -d
 ```
 
 ---
 
-# 🐳 Docker Architecture
+# ☸ Kubernetes Deployment
 
-```text
-              Nginx
-                 │
-      ┌──────────┴──────────┐
-      ▼                     ▼
- React Client          Backend API
-                              │
-                              ▼
-                          MongoDB
+Resources Created
+
+- Namespace
+- Backend Deployment
+- Admin Deployment
+- MongoDB Deployment
+- Services
+- Persistent Volume Claim
+- Ingress
+
+Deployment
+
+```
+kubectl apply -f k8s/
 ```
 
 ---
 
-# 🔐 Security
+# 📦 Helm Deployment
 
-### Implemented
+Install
 
-- Docker Image Scanning using Trivy
-- GitHub Secrets
-- Docker Hub Personal Access Token
+```
+helm install filmflix ./helm/filmflix
+```
+
+Upgrade
+
+```
+helm upgrade filmflix ./helm/filmflix
+```
+
+---
+
+# ☁ Terraform Deployment
+
+Initialize
+
+```
+terraform init
+```
+
+Validate
+
+```
+terraform validate
+```
+
+Plan
+
+```
+terraform plan
+```
+
+Apply
+
+```
+terraform apply
+```
+
+Terraform provisions
+
+- EC2 Instance
+- Security Groups
+- Key Pair
+- User Data
+
+---
+
+# 🔒 Security
+
+Implemented
+
+- Trivy Image Scanning
+- Docker Best Practices
 - Environment Variables
-- Nginx Reverse Proxy
-
-### Planned
-
-- AWS Secrets Manager
-- Kubernetes Secrets
-- SSL using Let's Encrypt
-- Security Headers
-- Rate Limiting
+- GitHub Secrets
+- Jenkins Credentials
 
 ---
 
-# 🚀 Deployment Flow
+# 📈 Current Deployment Workflow
 
-```text
+```
 Developer
+
+↓
+
+Git Push
 
 ↓
 
@@ -238,11 +282,11 @@ GitHub
 
 ↓
 
-GitHub Actions (CI)
+GitHub Actions
 
 ↓
 
-Jenkins Pipeline
+Jenkins
 
 ↓
 
@@ -258,80 +302,67 @@ Docker Compose
 
 ↓
 
-Nginx
-
-↓
-
-Users
+Application
 ```
 
 ---
 
-# ✅ Current Features
+# 🚧 Kubernetes Workflow
 
-- Dockerized Backend
-- Dockerized React Client
-- Multi-container Docker Compose
-- Development & Production Compose Files
-- GitHub Actions CI
-- Jenkins CI/CD
-- Docker Hub Integration
-- Trivy Security Scan
-- AWS EC2 Deployment
-- Nginx Reverse Proxy
-- Environment Separation (Development & Production)
+```
+GitHub
+
+↓
+
+Jenkins
+
+↓
+
+Docker Hub
+
+↓
+
+Kubernetes Cluster
+
+↓
+
+Helm Release
+
+↓
+
+Application
+```
 
 ---
 
-# 📊 Monitoring (Planned)
+# 📋 Features Implemented
 
-The project will be monitored using:
+- GitHub Actions CI
+- Jenkins CI/CD
+- Docker
+- Docker Compose
+- Terraform
+- AWS EC2
+- Kubernetes
+- Helm
+- Nginx Reverse Proxy
+- MongoDB
+- Trivy Security Scan
 
+---
+
+# 🔜 Upcoming
+
+- ArgoCD (GitOps)
 - Prometheus
 - Grafana
 - Node Exporter
 - cAdvisor
-
-Metrics:
-
-- CPU Usage
-- Memory Usage
-- Disk Usage
-- Docker Container Metrics
-- Network Usage
-
----
-
-# ☁️ Future Roadmap
-
-## Completed ✅
-
-- [x] Docker
-- [x] Docker Compose
-- [x] GitHub Actions
-- [x] Jenkins CI/CD
-- [x] Docker Hub
-- [x] Trivy
-- [x] AWS EC2 Deployment
-- [x] Nginx Reverse Proxy
-
-## In Progress 🚧
-
-- [ ] Prometheus
-- [ ] Grafana
-- [ ] Node Exporter
-- [ ] cAdvisor
-
-## Upcoming 📌
-
-- [ ] Terraform
-- [ ] Kubernetes
-- [ ] Helm
-- [ ] ArgoCD
-- [ ] Loki
-- [ ] Alertmanager
-- [ ] Horizontal Pod Autoscaler (HPA)
-- [ ] Ingress Controller
+- Loki
+- Alertmanager
+- Horizontal Pod Autoscaler
+- Kubernetes Autoscaling
+- EKS Deployment
 
 ---
 
@@ -345,34 +376,11 @@ DevOps Engineer
 
 - AWS
 - Docker
-- Docker Compose
+- Kubernetes
+- Helm
+- Terraform
 - Jenkins
 - GitHub Actions
 - Linux
-- Nginx
-- Trivy
 - Git
-- MongoDB
-- React
-- Node.js
-
----
-
-# ⭐ Key Learning Outcomes
-
-This project demonstrates:
-
-- End-to-End CI/CD Pipeline
-- Containerization using Docker
-- Multi-container Applications
-- Secure Image Scanning
-- Docker Registry Management
-- Production Deployment on AWS EC2
-- Reverse Proxy Configuration
-- Environment Separation
-- Production-ready Project Structure
-- Enterprise DevOps Workflow
-
----
-
-If you found this project helpful, don't forget to ⭐ Star the repository.
+- Nginx
