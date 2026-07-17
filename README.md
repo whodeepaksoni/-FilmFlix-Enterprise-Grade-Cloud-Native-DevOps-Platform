@@ -1,386 +1,184 @@
 # 🎬 FilmFlix - Enterprise Grade Cloud Native DevOps Platform
 
-> Production-ready Netflix-inspired application demonstrating an end-to-end DevOps lifecycle using GitHub Actions, Jenkins, Docker, Kubernetes, Helm, Terraform and AWS.
+A complete end-to-end Cloud Native DevOps project demonstrating modern CI/CD, Infrastructure as Code, containerization, and Kubernetes deployment on AWS.
+
+---
+
+# 🏗️ Architecture Diagram
+
+![FilmFlix Architecture](screenshots/filmflix_architecture_v1.png)
 
 ---
 
 # 🚀 Project Overview
 
-FilmFlix is a Netflix-inspired streaming platform built to showcase a complete DevOps workflow.
+FilmFlix is a Netflix-inspired web application deployed using a complete DevOps pipeline.
 
-The project demonstrates:
-
-- CI using GitHub Actions
-- CD using Jenkins
-- Containerization using Docker
-- Production deployment using Docker Compose
-- Infrastructure provisioning using Terraform
-- Kubernetes deployment
-- Helm package management
-- AWS EC2 deployment
+The project covers the complete software delivery lifecycle from source code management to automated deployment on Kubernetes.
 
 ---
 
-# 🏗 Architecture
+# 🛠 Tech Stack
 
-```
-                Developer
-                    │
-               Git Push
-                    │
-                    ▼
-            GitHub Repository
-                    │
-        ┌───────────┴───────────┐
-        │                       │
-        ▼                       ▼
- GitHub Actions (CI)       Jenkins (CD)
- Build + Trivy Scan      Build & Deployment
-        │                       │
-        └───────────┬───────────┘
-                    ▼
-              Docker Images
-                    │
-                    ▼
-               Docker Hub
-                    │
-          ┌─────────┴─────────┐
-          │                   │
-          ▼                   ▼
- Docker Compose         Kubernetes
-     (EC2)               + Helm
-          │
-          ▼
-     FilmFlix Platform
-```
-
----
-
-# ⚙ Tech Stack
-
-## Cloud
-
+### Cloud
 - AWS EC2
 
-## Infrastructure as Code
-
+### Infrastructure as Code
 - Terraform
 
-## CI/CD
+### Version Control
+- Git
+- GitHub
 
+### CI/CD
 - GitHub Actions
 - Jenkins
 
-## Containers
-
+### Containers
 - Docker
 - Docker Compose
 
-## Container Orchestration
-
+### Container Orchestration
 - Kubernetes
-- Helm
 
-## Reverse Proxy
-
-- Nginx
-
-## Database
-
+### Database
 - MongoDB
 
-## Backend
-
+### Backend
 - Node.js
 - Express.js
 
-## Frontend
-
-- React (Admin Panel)
-
-## Security
-
-- Trivy
+### Frontend
+- React.js
 
 ---
 
 # 📂 Project Structure
 
-```
 Project-Flimflix/
-
+│
 ├── admin/
 ├── client/
-├── models/
 ├── routes/
-
+├── models/
+├── middleware/
 ├── k8s/
-│   ├── backend-deployment.yaml
-│   ├── admin-deployment.yaml
-│   ├── mongodb-deployment.yaml
-│   ├── services
-│   ├── ingress.yaml
-│   └── pvc.yaml
-
-├── helm/
-│   └── filmflix/
-
 ├── terraform/
-
-├── nginx/
-│   ├── dev/
-│   └── prod/
-
-├── monitoring/
-
-├── docker-compose.dev.yml
-├── docker-compose.prod.yml
-
+├── .github/workflows/
+├── Dockerfile
+├── docker-compose.yml
 ├── Jenkinsfile
-
 └── README.md
-```
 
 ---
 
-# 🔄 CI Pipeline
+# ⚙ Features
 
-GitHub Actions performs:
-
-- Checkout Repository
-- Docker Build
-- Trivy Security Scan
-- Pull Request Validation
-
----
-
-# 🚀 CD Pipeline
-
-Jenkins performs:
-
-- Checkout Source
-- Build Docker Images
-- Trivy Scan
-- Docker Hub Push
-- Deploy to AWS EC2
-- Docker Compose Deployment
-
----
-
-# 🐳 Docker Compose Deployment
-
-Services
-
-- Backend
-- Admin
-- MongoDB
-- Nginx
-
-Deployment
-
-```
-docker compose -f docker-compose.prod.yml up -d
-```
-
----
-
-# ☸ Kubernetes Deployment
-
-Resources Created
-
-- Namespace
-- Backend Deployment
-- Admin Deployment
+- Infrastructure provisioning using Terraform
+- Automated CI using GitHub Actions
+- Automated CD using Jenkins
+- Dockerized application
+- Docker Compose deployment
+- Kubernetes Deployments
+- Kubernetes Services
+- Ingress Controller
+- Persistent Volume Claim (PVC)
+- StorageClass
 - MongoDB Deployment
-- Services
-- Persistent Volume Claim
-- Ingress
-
-Deployment
-
-```
-kubectl apply -f k8s/
-```
+- End-to-End CI/CD Pipeline
 
 ---
 
-# 📦 Helm Deployment
-
-Install
-
-```
-helm install filmflix ./helm/filmflix
-```
-
-Upgrade
-
-```
-helm upgrade filmflix ./helm/filmflix
-```
-
----
-
-# ☁ Terraform Deployment
-
-Initialize
-
-```
-terraform init
-```
-
-Validate
-
-```
-terraform validate
-```
-
-Plan
-
-```
-terraform plan
-```
-
-Apply
-
-```
-terraform apply
-```
-
-Terraform provisions
-
-- EC2 Instance
-- Security Groups
-- Key Pair
-- User Data
-
----
-
-# 🔒 Security
-
-Implemented
-
-- Trivy Image Scanning
-- Docker Best Practices
-- Environment Variables
-- GitHub Secrets
-- Jenkins Credentials
-
----
-
-# 📈 Current Deployment Workflow
-
-```
+# 🔄 CI/CD Workflow
 Developer
-
 ↓
-
 Git Push
-
 ↓
-
 GitHub
-
 ↓
-
 GitHub Actions
-
 ↓
-
 Jenkins
-
 ↓
-
+Docker Build
+↓
 Docker Hub
-
 ↓
-
 AWS EC2
-
 ↓
-
-Docker Compose
-
-↓
-
-Application
-```
-
----
-
-# 🚧 Kubernetes Workflow
-
-```
-GitHub
-
-↓
-
-Jenkins
-
-↓
-
-Docker Hub
-
-↓
-
 Kubernetes Cluster
 
-↓
+---
 
-Helm Release
+# 📦 Kubernetes Resources
 
-↓
+- Namespace
+- Deployment
+- Service
+- Ingress
+- Secret
+- Persistent Volume Claim
+- Storage Class
 
-Application
-```
+---
+# 🌐 Application Access
+
+Admin Application
+
+
+http://<EC2-Public-IP>
+
+
+Backend API
+
+
+http://<EC2-Public-IP>:<NodePort>
 
 ---
 
-# 📋 Features Implemented
+# 📸 Screenshots
 
-- GitHub Actions CI
-- Jenkins CI/CD
-- Docker
-- Docker Compose
-- Terraform
-- AWS EC2
-- Kubernetes
-- Helm
-- Nginx Reverse Proxy
-- MongoDB
-- Trivy Security Scan
+## GitHub Actions
+![GitHub Actions](screenshots/GitHub_Actions.png), 
+![GitHub Actions](screenshots/GitHub_Actions_2.png) 
+
+## Jenkins Pipeline
+![Jenkins](screenshots/Jenkins_pipeline.png), 
+![Jenkins](screenshots/Jenkins_Pipeline_Status.png)
+
+## Terraform Infrastructure
+![Terraform](screenshots/terraform_apply.png)
+
+## Kubernetes all
+![Pods](screenshots/Kubectl_get_all.png)
+
+
+
+## Application
+![Application](screenshots/admin_service.png)
+
+## Backend API
+![Backend](screenshots/backend-api.png)
 
 ---
 
-# 🔜 Upcoming
+# 🚀 Future Improvements (Version 2)
 
-- ArgoCD (GitOps)
+- Helm Charts
 - Prometheus
 - Grafana
-- Node Exporter
-- cAdvisor
-- Loki
-- Alertmanager
-- Horizontal Pod Autoscaler
-- Kubernetes Autoscaling
-- EKS Deployment
+- ArgoCD
+- GitOps Deployment
+- Monitoring & Alerting
 
 ---
 
 # 👨‍💻 Author
 
-**Deepak Soni**
+Deepak Soni
 
-DevOps Engineer
+GitHub:
+https://github.com/whodeepaksoni
 
-### Skills
-
-- AWS
-- Docker
-- Kubernetes
-- Helm
-- Terraform
-- Jenkins
-- GitHub Actions
-- Linux
-- Git
-- Nginx
+LinkedIn:
+https://www.linkedin.com/in/whodeepaksoni/
