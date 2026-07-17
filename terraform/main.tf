@@ -156,7 +156,19 @@ resource "aws_security_group" "filmflix_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    from_port   = 32570
+    to_port     = 32570
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
+  ingress {
+    from_port   = 32248
+    to_port     = 32248
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
     from_port   = 8081
     to_port     = 8081

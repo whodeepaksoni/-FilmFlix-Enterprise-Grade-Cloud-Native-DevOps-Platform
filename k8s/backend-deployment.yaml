@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: whodeepaksoni/filmflix-api:latest
+        image: whodeepaksoni/filmflix-backend:latest
 
         imagePullPolicy: Always
 
