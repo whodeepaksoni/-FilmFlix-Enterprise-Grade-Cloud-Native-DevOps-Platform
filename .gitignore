@@ -20,3 +20,6 @@ terraform/.terraform.lock.hcl
 
 # Terraform Plan
 *.tfplan
+
+monitoring
+helm
